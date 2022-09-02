@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "konpeko",
+  "version": "${version}",
+  "name": "Konpeko",
+  "description": "Mod to add client sided utilities",
+  "authors": [
+    "mostlyfireproof"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/konpeko/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "mostlyfireproof.konpeko.client.KonpekoClient"
+    ],
+    "main": [
+      "mostlyfireproof.konpeko.Konpeko"
+    ]
+  },
+  "mixins": [
+    "konpeko.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  }
+}
