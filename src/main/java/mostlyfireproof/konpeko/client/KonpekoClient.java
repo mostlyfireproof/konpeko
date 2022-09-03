@@ -31,6 +31,11 @@ public class KonpekoClient implements ClientModInitializer {
         Konpeko.LOGGER.info("Glow: " + glow);
     }
 
+    public static void setGlow(boolean b) {
+        glow = b;
+        Konpeko.LOGGER.info("Glow: " + glow);
+    }
+
     private boolean isPlayer(Entity entity) {
         boolean result = entity.getType().toString().equals("entity.minecraft.player");
         // System.out.println(entity.getType() + " " + result);
