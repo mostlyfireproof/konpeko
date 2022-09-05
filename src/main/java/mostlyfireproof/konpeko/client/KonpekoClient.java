@@ -39,7 +39,7 @@ public class KonpekoClient implements ClientModInitializer {
 
     /**
      * Turns the glow effect off or on
-     * @param b
+     * @param b true for on, false for off
      */
     public static void setGlow(boolean b) {
         glow = b;
@@ -58,40 +58,29 @@ public class KonpekoClient implements ClientModInitializer {
     }
 
     /**
-     * Copied from MinecraftClient.java doItemUse() since that's private
+     * Attacks whatever entity is in the player's crosshair
      * @param client
      */
-    public boolean attackEntity(MinecraftClient client) {
-//        client.player.getAttackCooldownProgressPerTick()
+    public void attackEntity(MinecraftClient client) {
         if (client.crosshairTarget == null) {
             Konpeko.LOGGER.error("Null returned as 'hitResult', this shouldn't happen!");
-            return false;
         }
         else if (client.player.isRiding()) {
-            return false;
+            return;
         }
         else {
-            boolean bl = false;
             switch (client.crosshairTarget.getType()) {
                 case ENTITY:
-                    client.interactionManager.attackEntity(client.player, ((EntityHitResult)client.crosshairTarget).getEntity());
+//                    Konpeko.LOGGER.info(String.valueOf(client.player.getAttackCooldownProgress(0.5F)));
+                    if (client.player.getAttackCooldownProgress(0.5F) == 1.0) {
+                        client.interactionManager.attackEntity(client.player, ((EntityHitResult)client.crosshairTarget).getEntity());
+                        client.player.swingHand(Hand.MAIN_HAND);
+                    }
                     break;
                 case BLOCK:
-                    BlockHitResult blockHitResult = (BlockHitResult)client.crosshairTarget;
-                    BlockPos blockPos = blockHitResult.getBlockPos();
-                    if (!client.world.getBlockState(blockPos).isAir()) {
-                        client.interactionManager.attackBlock(blockPos, blockHitResult.getSide());
-                        if (client.world.getBlockState(blockPos).isAir()) {
-                            bl = true;
-                        }
-                        break;
-                    }
                 case MISS:
-                    client.player.resetLastAttackedTicks();
+                    break;
             }
-
-            client.player.swingHand(Hand.MAIN_HAND);
-            return bl;
         }
     }
 
@@ -114,16 +103,11 @@ public class KonpekoClient implements ClientModInitializer {
             if (autoSwing.isPressed()) {
                 //toggleGlow();
                 attackEntity(MinecraftClient.getInstance());
-
             }
             if (openMenu.isPressed()) {
                 MinecraftClient.getInstance().setScreen(new MenuScreen(new MenuGui()));
             }
 
         });
-
-
-
-
     }
 }
