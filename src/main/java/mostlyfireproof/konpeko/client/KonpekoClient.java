@@ -89,6 +89,8 @@ public class KonpekoClient implements ClientModInitializer {
         KeyBinding autoSwing = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(
                         "key.konpeko.keybind_1",
+                        // InputUtil.Type.MOUSE,
+                        // GLFW.GLFW_MOUSE_BUTTON_4,
                         InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_G,
                         "key.category.first.test"));
