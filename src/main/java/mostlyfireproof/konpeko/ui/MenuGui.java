@@ -39,7 +39,7 @@ public class MenuGui extends LightweightGuiDescription {
         root.add(toggleButtonGlow, 0, 2, 10, 1);
 
         WToggleButton toggleAntiAntiCheat = new WToggleButton(Text.literal("Toggle AC Avoidance"));
-        toggleButtonGlow.setOnToggle(on -> {
+        toggleAntiAntiCheat.setOnToggle(on -> {
             if (on) {
                 KonpekoClient.setAvoidAC(true);
             } else {

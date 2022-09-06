@@ -47,12 +47,12 @@ public class KonpekoClient implements ClientModInitializer {
      */
     public static void setGlow(boolean b) {
         glow = b;
-        Konpeko.LOGGER.info("Glow: " + glow);
+        // Konpeko.LOGGER.debug("Glow: " + glow);
     }
 
     public static void setAvoidAC(boolean b) {
         avoidAC = b;
-        Konpeko.LOGGER.info("avoidAC: " + avoidAC);
+        // Konpeko.LOGGER.debug("avoidAC: " + avoidAC);
     }
 
     /**
@@ -81,7 +81,7 @@ public class KonpekoClient implements ClientModInitializer {
             switch (client.crosshairTarget.getType()) {
                 case ENTITY:
                     // miss chance to try to avoid AC
-                    if (!avoidAC && random.nextFloat() <= 0.3F) {
+                    if (!avoidAC || random.nextFloat() <= 0.3F) {
                         if (client.player.getAttackCooldownProgress(0) == 1.0) {
                             client.interactionManager.attackEntity(client.player, ((EntityHitResult)client.crosshairTarget).getEntity());
                             client.player.swingHand(Hand.MAIN_HAND);
@@ -90,7 +90,7 @@ public class KonpekoClient implements ClientModInitializer {
                     break;
                 case BLOCK:
                 case MISS:
-                    if (!avoidAC && random.nextFloat() <= .3F) {
+                    if (!avoidAC || random.nextFloat() <= .3F) {
                         client.player.swingHand(Hand.MAIN_HAND);
                     }
                     break;
