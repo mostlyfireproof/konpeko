@@ -2,16 +2,16 @@
 A Minecraft utility mod using Fabric
 
 ### Install
-* Once I figure this out I will explain how
-* gradle build and then drop the jar in to your mods folder probably
+* To build: clone the repo and run `gradlew build`, or build in IntelliJ
+* To install: install `konpeko\build\libs\konpeko-x.x.x.jar`
 
 ### Features
 * Makes entities glow (can be toggled)
+* Triggerbot (attacks entities in your crosshair)
+* Anticheat avoidance (untested)
 * More soon (tm)
 
 ### Todo
-* Menu GUI
+* Better Menu GUI with tabs(?)
 * Force Rolex
-* Glow Fixes
-  * make the key less sensitive
-  * choose which types of mobs to highlight
+* Better anti AC

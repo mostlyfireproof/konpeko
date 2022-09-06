@@ -38,13 +38,24 @@ public class MenuGui extends LightweightGuiDescription {
         });
         root.add(toggleButtonGlow, 0, 2, 10, 1);
 
+        WToggleButton toggleAntiAntiCheat = new WToggleButton(Text.literal("Toggle AC Avoidance"));
+        toggleButtonGlow.setOnToggle(on -> {
+            if (on) {
+                KonpekoClient.setAvoidAC(true);
+            } else {
+                KonpekoClient.setAvoidAC(false);
+            }
+            Konpeko.LOGGER.info("AntiAntiCheat toggled to " + (on ? "on" : "off"));
+        });
+        root.add(toggleAntiAntiCheat, 0, 3, 10, 1);
+
         WToggleButton toggleButtonRolex = new WToggleButton(Text.literal("Force Rolex"));
         toggleButtonRolex.setOnToggle(on -> {
             Konpeko.LOGGER.info("Rolex toggled to " + (on ? "on" : "off"));
         });
         //toggleButtonRolex.setOnImage(new Texture(new Identifier("minecraft:textures/item/redstone.png")));
 
-        root.add(toggleButtonRolex, 0, 3, 10, 1);
+        root.add(toggleButtonRolex, 0, 6, 10, 1);
 
 
         root.validate(this);

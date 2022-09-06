@@ -24,9 +24,13 @@ import net.minecraft.util.math.BlockPos;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 
+import java.util.Random;
+
 @Environment(EnvType.CLIENT)
 public class KonpekoClient implements ClientModInitializer {
     private static boolean glow = false;
+    private static boolean avoidAC = false;
+    private Random random = new Random();
 
     public static boolean getGlow() {
         return glow;
@@ -44,6 +48,11 @@ public class KonpekoClient implements ClientModInitializer {
     public static void setGlow(boolean b) {
         glow = b;
         Konpeko.LOGGER.info("Glow: " + glow);
+    }
+
+    public static void setAvoidAC(boolean b) {
+        avoidAC = b;
+        Konpeko.LOGGER.info("avoidAC: " + avoidAC);
     }
 
     /**
@@ -71,14 +80,19 @@ public class KonpekoClient implements ClientModInitializer {
         else {
             switch (client.crosshairTarget.getType()) {
                 case ENTITY:
-//                    Konpeko.LOGGER.info(String.valueOf(client.player.getAttackCooldownProgress(0.5F)));
-                    if (client.player.getAttackCooldownProgress(0.5F) == 1.0) {
-                        client.interactionManager.attackEntity(client.player, ((EntityHitResult)client.crosshairTarget).getEntity());
-                        client.player.swingHand(Hand.MAIN_HAND);
+                    // miss chance to try to avoid AC
+                    if (!avoidAC && random.nextFloat() <= 0.3F) {
+                        if (client.player.getAttackCooldownProgress(0) == 1.0) {
+                            client.interactionManager.attackEntity(client.player, ((EntityHitResult)client.crosshairTarget).getEntity());
+                            client.player.swingHand(Hand.MAIN_HAND);
+                        }
                     }
                     break;
                 case BLOCK:
                 case MISS:
+                    if (!avoidAC && random.nextFloat() <= .3F) {
+                        client.player.swingHand(Hand.MAIN_HAND);
+                    }
                     break;
             }
         }
