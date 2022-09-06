@@ -9,9 +9,14 @@ A Minecraft utility mod using Fabric
 * Makes entities glow (can be toggled)
 * Triggerbot (attacks entities in your crosshair)
 * Anticheat avoidance (untested)
+* Custom logging system, SpruceLog
 * More soon (tm)
 
 ### Todo
 * Better Menu GUI with tabs(?)
-* Force Rolex
+  * Combat, Info, Util, Funny, Info
+* **Force Rolex**
 * Better anti AC
+* Print player health on hit
+* Display player info in name bar
+* Fewer logging levels

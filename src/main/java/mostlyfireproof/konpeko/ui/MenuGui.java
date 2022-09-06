@@ -35,6 +35,7 @@ public class MenuGui extends LightweightGuiDescription {
             } else {
                 KonpekoClient.setGlow(false);
             }
+            Konpeko.LOGGER.info("Glow toggled to " + (on ? "on" : "off"));
         });
         root.add(toggleButtonGlow, 0, 2, 10, 1);
 
