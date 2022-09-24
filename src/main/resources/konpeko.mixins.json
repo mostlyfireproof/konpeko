@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "EntityGlowMixin"
+    "EntityGlowMixin",
+    "NametagMixin"
   ],
   "injectors": {
     "defaultRequire": 1
